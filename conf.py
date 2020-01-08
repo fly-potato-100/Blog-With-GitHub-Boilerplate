@@ -17,6 +17,7 @@ enable_jsdelivr = {
     "enabled": False,
     "repo": ""
 }
+category_by_folder = True
 
 # 站点设置
 site_name = "豆破苍穹"
@@ -34,11 +35,6 @@ external_links = [
         "url": "https://github.com/AlanDecode/Maverick",
         "brief": "🏄‍ Go My Own Way."
     },
-    {
-        "name": "三無計劃",
-        "url": "https://www.imalan.cn",
-        "brief": "熊猫小A的主页。"
-    }
 ]
 nav = [
     {
@@ -60,20 +56,10 @@ nav = [
 
 social_links = [
     {
-        "name": "Twitter",
-        "url": "https://twitter.com/AlanDecode",
-        "icon": "gi gi-twitter"
-    },
-    {
         "name": "GitHub",
         "url": "https://github.com/AlanDecode",
         "icon": "gi gi-github"
     },
-    {
-        "name": "Weibo",
-        "url": "https://weibo.com/5245109677/",
-        "icon": "gi gi-weibo"
-    }
 ]
 
 head_addon = r'''
