@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><id>/Blog-With-GitHub-Boilerplate/</id><title>豆破苍穹</title><updated>2020-01-10T04:34:42.787906+08:06</updated><author><name>飞奔的土豆</name><email>sdyk88@gmail.com</email></author><link href="/Blog-With-GitHub-Boilerplate/" rel="alternate"/><generator uri="http://lkiesow.github.io/python-feedgen" version="0.8.0">python-feedgen</generator><logo>/Blog-With-GitHub-Boilerplate/logo.png</logo><subtitle>不知道说点啥</subtitle><entry><id>/Blog-With-GitHub-Boilerplate/archives/typography/</id><title>Hello World!</title><updated>2020-01-10T04:34:42.788052+00:00</updated><author><name>AlanDecode</name><email>sdyk88@gmail.com</email><uri>https://www.google.com</uri></author><content>&lt;div class="notice"&gt;这是一篇示例文章，在这里你可以看到常用页面元素的显示效果，同时也是 Markdown 语法的参考文章。保留或者删除本文，开始自己的创作吧！&lt;/div&gt;&lt;h2&gt;L2 Heading&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><id>/Blog-With-GitHub-Boilerplate/</id><title>豆破苍穹</title><updated>2020-01-10T08:35:27.394609+08:06</updated><author><name>飞奔的土豆</name><email>sdyk88@gmail.com</email></author><link href="/Blog-With-GitHub-Boilerplate/" rel="alternate"/><generator uri="http://lkiesow.github.io/python-feedgen" version="0.8.0">python-feedgen</generator><logo>/Blog-With-GitHub-Boilerplate/logo.png</logo><subtitle>不知道说点啥</subtitle><entry><id>/Blog-With-GitHub-Boilerplate/archives/typography/</id><title>Hello World!</title><updated>2020-01-10T08:35:27.394764+00:00</updated><author><name>AlanDecode</name><email>sdyk88@gmail.com</email><uri>https://www.google.com</uri></author><content>&lt;div class="notice"&gt;这是一篇示例文章，在这里你可以看到常用页面元素的显示效果，同时也是 Markdown 语法的参考文章。保留或者删除本文，开始自己的创作吧！&lt;/div&gt;&lt;h2&gt;L2 Heading&lt;/h2&gt;
 &lt;h3&gt;L3 Heading&lt;/h3&gt;
 &lt;h4&gt;L4 Heading&lt;/h4&gt;
 &lt;h5&gt;L5 Heading&lt;/h5&gt;
@@ -78,24 +78,78 @@
 &lt;/table&gt;
 &lt;h2&gt;Link Card&lt;/h2&gt;
 &lt;div class="links"&gt;
-&lt;a style="display:block" target="_blank" href="https://www.imalan.cn" class="board-item"&gt;                 &lt;div class="board-thumb"&gt;&lt;img src="https://secure.gravatar.com/avatar/1741a6eef5c824899e347e4afcbaa75d?s=200&amp;r=G&amp;d="&gt;&lt;/div&gt;                 &lt;div class="board-title"&gt;AlanDecode&lt;/div&gt;&lt;/a&gt;&lt;/div&gt;&lt;hr&gt;&lt;div class="footnotes"&gt;&lt;ol&gt;&lt;li id="fn_1"&gt;Home page for AlanDecode &lt;a no-style href="#fn_ref_1"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;</content><link href="/Blog-With-GitHub-Boilerplate/archives/typography/" rel="alternate"/><published>2019-12-18T16:50:00+08:06</published></entry><entry><id>/Blog-With-GitHub-Boilerplate/archives/centos76_env_prepare/</id><title>CentOS7.6环境搭建</title><updated>2020-01-10T04:34:42.787979+00:00</updated><author><name>None</name><email>sdyk88@gmail.com</email><uri>https://www.google.com</uri></author><content>&lt;h2&gt;系统环境&lt;/h2&gt;
+&lt;a style="display:block" target="_blank" href="https://www.imalan.cn" class="board-item"&gt;                 &lt;div class="board-thumb"&gt;&lt;img src="https://secure.gravatar.com/avatar/1741a6eef5c824899e347e4afcbaa75d?s=200&amp;r=G&amp;d="&gt;&lt;/div&gt;                 &lt;div class="board-title"&gt;AlanDecode&lt;/div&gt;&lt;/a&gt;&lt;/div&gt;&lt;hr&gt;&lt;div class="footnotes"&gt;&lt;ol&gt;&lt;li id="fn_1"&gt;Home page for AlanDecode &lt;a no-style href="#fn_ref_1"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;</content><link href="/Blog-With-GitHub-Boilerplate/archives/typography/" rel="alternate"/><published>2019-12-18T16:50:00+08:06</published></entry><entry><id>/Blog-With-GitHub-Boilerplate/archives/centos76_env_prepare/</id><title>CentOS7.6环境搭建</title><updated>2020-01-10T08:35:27.394688+00:00</updated><author><name>None</name><email>sdyk88@gmail.com</email><uri>https://www.google.com</uri></author><content>&lt;h2&gt;系统环境&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Windows 10 &lt;strong&gt;1809或更高&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;启用WSL&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Distro下载&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/yuk7/CentWSL"&gt;CentWSL&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/yuk7/CentWSL"&gt;CentWSL 7.6&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;安装步骤&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;解压下载下来的zip文件，得到&lt;code&gt;CentOS7&lt;/code&gt;目录，其中包含了&lt;code&gt;CentOS7.exe&lt;/code&gt;。&lt;/li&gt;
 &lt;li&gt;将该目录移到希望安装的目录下，官方建议最好是&lt;code&gt;C:\&lt;/code&gt;下，我尝试过安装到&lt;code&gt;D:\&lt;/code&gt;，暂未发现不妥。&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;tip1&lt;/strong&gt; 因为办公用电脑使用了域用户管理，禁用了admin。这种情况下，安装目录必须放到&lt;code&gt;C:\Users\XXX&lt;/code&gt;下，否则会因为权限不足导致安装失败。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;tip2&lt;/strong&gt; 如果同一个Distro希望安装多个实例，可以将&lt;code&gt;CentOS7&lt;/code&gt;的目录名和目录下的&lt;code&gt;CentOS7.exe&lt;/code&gt;文件名修改为其他（目录名和exe文件名保持一致），比如&lt;code&gt;MyCentOS7&lt;/code&gt;、&lt;code&gt;MyCentOS7.exe&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;tip&lt;/strong&gt; 因为办公用电脑使用了域用户管理，禁用了admin。这种情况下，安装目录必须放到&lt;code&gt;C:\Users\XXX&lt;/code&gt;下，否则会因为权限不足导致安装失败。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;tip&lt;/strong&gt; 如果同一个distro希望安装多个实例，可以将&lt;code&gt;CentOS7&lt;/code&gt;的目录名和目录下的&lt;code&gt;CentOS7.exe&lt;/code&gt;文件名修改为其他（目录名和exe文件名保持一致），比如&lt;code&gt;MyCentOS7&lt;/code&gt;、&lt;code&gt;MyCentOS7.exe&lt;/code&gt;。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;双击exe等待安装完成。&lt;/li&gt;
-&lt;li&gt;安装完成后双击exe，或者cmd中输入wsl（如果当前distro是唯一的wsl实例的话），就可以进入到CentOS的shell中了。&lt;/li&gt;
+&lt;li&gt;安装完成后双击exe，或者cmd中输入wsl（如果当前distro是唯一的wsl实例的话），就可以进入到CentOS的shell中了。&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;tip&lt;/strong&gt; 在cmd中，输入&lt;code&gt;wslconfig /l&lt;/code&gt;可以查看当前安装了哪些distro实例；输入&lt;code&gt;wslconfig /s CentOS7&lt;/code&gt;可以将wsl默认实例改为CentOS7。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;一些设置和优化&lt;/h2&gt;
+&lt;div class="notice"&gt;如无特别说明，使用root完成下面的操作。&lt;/div&gt;&lt;h3&gt;账户管理&lt;/h3&gt;
+&lt;p&gt;该distro安装后，默认进入的账户是root。建议新建用户自己的账户：
+&lt;code&gt;useradd testuser -d /home/testuser&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;回到cmd中，进入CentOS7的安装目录下，可以通过命令指定进入wsl时的默认用户：
+&lt;code&gt;CentOS7.exe config --default-user testuser&lt;/code&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;tip&lt;/strong&gt; 以默认用户进入wsl时，会自动继承Windows的PATH变量，即可以直接使用Windows系统自带的exe命令；非默认用户如果也想继承，只能手动export。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果想以root用户登录，可以在wsl里，授予用户&lt;code&gt;sudo su -&lt;/code&gt;权限；也可以直接在cmd中运行以下命令：
+&lt;code&gt;wsl -u root&lt;/code&gt;。&lt;/p&gt;
+&lt;h3&gt;WSL启动配置&lt;/h3&gt;
+&lt;p&gt;wsl允许配置&lt;code&gt;/etc/wsl.conf&lt;/code&gt;以在启动时完成自动配置。（详见&lt;a href="https://devblogs.microsoft.com/commandline/automatically-configuring-wsl/"&gt;Automatically Configuring WSL&lt;/a&gt;）&lt;/p&gt;
+&lt;p&gt;为了能以正常权限将Windows下的盘符挂载到wsl中，可以采用以下wsl.conf：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;automount&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;enabled&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;span class="nv"&gt;root&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /mnt
+&lt;span class="nv"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;metadata,uid=1000,gid=1000,dmask=022,fmask=033&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;mountFsTab&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;该配置会以&lt;code&gt;uid=1000,gid=1000&lt;/code&gt;的属主（如果按上面的操作执行，这里&lt;code&gt;uid=1000&lt;/code&gt;的用户应该正是&lt;code&gt;testuser&lt;/code&gt;）挂载盘符到&lt;code&gt;/mnt&lt;/code&gt;下，默认的目录权限为0755，默认的文件权限为0744。&lt;/p&gt;
+&lt;p&gt;可以自定options，但最好保证文件具备x权限，否则windows的exe可能无法在wsl中运行。&lt;/p&gt;
+&lt;h3&gt;systemctl&lt;/h3&gt;
+&lt;p&gt;CentOS的wsl目前无法运行&lt;code&gt;systemctl&lt;/code&gt;系列命令（据说是wsl底层问题，可能等wsl2发布后会修复）。幸运的是可以借用&lt;a href="https://github.com/gdraheim/docker-systemctl-replacement"&gt;docker-systemctl-replacement&lt;/a&gt;实现同样效果。方法如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /usr/bin
+mv systemctl systemctl.old &lt;span class="c1"&gt;# 备份下老的&lt;/span&gt;
+curl https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py &amp;gt; /tmp/systemctl.py &lt;span class="c1"&gt;# 只需使用这个python脚本&lt;/span&gt;
+mv /tmp/systemctl.py /usr/bin/systemctl
+chmod +x /usr/bin/systemctl &lt;span class="c1"&gt;# 增加可执行权限&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;SSH&lt;/h3&gt;
+&lt;p&gt;如果想用SecureCRT等终端连接到wsl，需要启用ssh。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;执行&lt;code&gt;ssh-keygen -A&lt;/code&gt;以生成默认key，否则sshd会启动失败。&lt;/li&gt;
+&lt;li&gt;配置&lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;。&lt;strong&gt;建议&lt;code&gt;UseDNS no&lt;/code&gt;&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;根据上一节提供的方法以启用&lt;code&gt;systemctl&lt;/code&gt;，执行&lt;code&gt;systemctl start sshd&lt;/code&gt;以启动sshd。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;systemctl status sshd&lt;/code&gt;检查是否运行成功。&lt;/li&gt;
+&lt;li&gt;如果希望开机启动sshd，可按以下步骤完成：&lt;ol&gt;
+&lt;li&gt;在wsl下，新建文件&lt;code&gt;/etc/init.wsl&lt;/code&gt;：&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#! /bin/bash&lt;/span&gt;
+service sshd &lt;span class="nv"&gt;$1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;保存文件，并赋予可执行权限&lt;code&gt;chmod +x /etc/init.wsl&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;在Windows下，&lt;code&gt;WIN+R&lt;/code&gt;打开&lt;code&gt;运行&lt;/code&gt;对话框，输入&lt;code&gt;shell:startup&lt;/code&gt;打开&lt;code&gt;启动&lt;/code&gt;目录，新建vbs脚本&lt;code&gt;start_centos_service.vbs&lt;/code&gt;：
+&lt;pre&gt;&lt;code&gt;Set ws = WScript.CreateObject("WScript.Shell")
+ws.run "wsl -d CentOS7 -u root /etc/init.wsl start", vbhide&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;Windows重启后，将自动执行该vbs脚本，并完成sshd自启动。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 </content><link href="/Blog-With-GitHub-Boilerplate/archives/centos76_env_prepare/" rel="alternate"/><published>2020-01-09T12:50:00+08:06</published></entry></feed>

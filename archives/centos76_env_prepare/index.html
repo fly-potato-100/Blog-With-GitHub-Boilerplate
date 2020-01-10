@@ -19,7 +19,7 @@
     <script>
         var ExSearchConfig = {
             root: "",
-            api: "/Blog-With-GitHub-Boilerplate/ff0486cf08865c4e8f7b8faa28e0af21.json"
+            api: "/Blog-With-GitHub-Boilerplate/3308602758d044717395e147bfe14980.json"
         }
     </script>
     
@@ -87,18 +87,72 @@
 </ul>
 <h2>Distro下载</h2>
 <ul>
-<li><a href="https://github.com/yuk7/CentWSL">CentWSL</a></li>
+<li><a href="https://github.com/yuk7/CentWSL">CentWSL 7.6</a></li>
 </ul>
 <h2>安装步骤</h2>
 <ol>
 <li>解压下载下来的zip文件，得到<code>CentOS7</code>目录，其中包含了<code>CentOS7.exe</code>。</li>
 <li>将该目录移到希望安装的目录下，官方建议最好是<code>C:\</code>下，我尝试过安装到<code>D:\</code>，暂未发现不妥。<ul>
-<li><strong>tip1</strong> 因为办公用电脑使用了域用户管理，禁用了admin。这种情况下，安装目录必须放到<code>C:\Users\XXX</code>下，否则会因为权限不足导致安装失败。</li>
-<li><strong>tip2</strong> 如果同一个Distro希望安装多个实例，可以将<code>CentOS7</code>的目录名和目录下的<code>CentOS7.exe</code>文件名修改为其他（目录名和exe文件名保持一致），比如<code>MyCentOS7</code>、<code>MyCentOS7.exe</code>。</li>
+<li><strong>tip</strong> 因为办公用电脑使用了域用户管理，禁用了admin。这种情况下，安装目录必须放到<code>C:\Users\XXX</code>下，否则会因为权限不足导致安装失败。</li>
+<li><strong>tip</strong> 如果同一个distro希望安装多个实例，可以将<code>CentOS7</code>的目录名和目录下的<code>CentOS7.exe</code>文件名修改为其他（目录名和exe文件名保持一致），比如<code>MyCentOS7</code>、<code>MyCentOS7.exe</code>。</li>
 </ul>
 </li>
 <li>双击exe等待安装完成。</li>
-<li>安装完成后双击exe，或者cmd中输入wsl（如果当前distro是唯一的wsl实例的话），就可以进入到CentOS的shell中了。</li>
+<li>安装完成后双击exe，或者cmd中输入wsl（如果当前distro是唯一的wsl实例的话），就可以进入到CentOS的shell中了。<ul>
+<li><strong>tip</strong> 在cmd中，输入<code>wslconfig /l</code>可以查看当前安装了哪些distro实例；输入<code>wslconfig /s CentOS7</code>可以将wsl默认实例改为CentOS7。</li>
+</ul>
+</li>
+</ol>
+<h2>一些设置和优化</h2>
+<div class="notice">如无特别说明，使用root完成下面的操作。</div><h3>账户管理</h3>
+<p>该distro安装后，默认进入的账户是root。建议新建用户自己的账户：
+<code>useradd testuser -d /home/testuser</code>。</p>
+<p>回到cmd中，进入CentOS7的安装目录下，可以通过命令指定进入wsl时的默认用户：
+<code>CentOS7.exe config --default-user testuser</code>。</p>
+<ul>
+<li><strong>tip</strong> 以默认用户进入wsl时，会自动继承Windows的PATH变量，即可以直接使用Windows系统自带的exe命令；非默认用户如果也想继承，只能手动export。</li>
+</ul>
+<p>如果想以root用户登录，可以在wsl里，授予用户<code>sudo su -</code>权限；也可以直接在cmd中运行以下命令：
+<code>wsl -u root</code>。</p>
+<h3>WSL启动配置</h3>
+<p>wsl允许配置<code>/etc/wsl.conf</code>以在启动时完成自动配置。（详见<a href="https://devblogs.microsoft.com/commandline/automatically-configuring-wsl/">Automatically Configuring WSL</a>）</p>
+<p>为了能以正常权限将Windows下的盘符挂载到wsl中，可以采用以下wsl.conf：</p>
+<div class="highlight"><pre><span></span><span class="o">[</span>automount<span class="o">]</span>
+<span class="nv">enabled</span> <span class="o">=</span> <span class="nb">true</span>
+<span class="nv">root</span> <span class="o">=</span> /mnt
+<span class="nv">options</span> <span class="o">=</span> <span class="s2">&quot;metadata,uid=1000,gid=1000,dmask=022,fmask=033&quot;</span>
+<span class="nv">mountFsTab</span> <span class="o">=</span> <span class="nb">false</span>
+</pre></div>
+<p>该配置会以<code>uid=1000,gid=1000</code>的属主（如果按上面的操作执行，这里<code>uid=1000</code>的用户应该正是<code>testuser</code>）挂载盘符到<code>/mnt</code>下，默认的目录权限为0755，默认的文件权限为0744。</p>
+<p>可以自定options，但最好保证文件具备x权限，否则windows的exe可能无法在wsl中运行。</p>
+<h3>systemctl</h3>
+<p>CentOS的wsl目前无法运行<code>systemctl</code>系列命令（据说是wsl底层问题，可能等wsl2发布后会修复）。幸运的是可以借用<a href="https://github.com/gdraheim/docker-systemctl-replacement">docker-systemctl-replacement</a>实现同样效果。方法如下：</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> /usr/bin
+mv systemctl systemctl.old <span class="c1"># 备份下老的</span>
+curl https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py &gt; /tmp/systemctl.py <span class="c1"># 只需使用这个python脚本</span>
+mv /tmp/systemctl.py /usr/bin/systemctl
+chmod +x /usr/bin/systemctl <span class="c1"># 增加可执行权限</span>
+</pre></div>
+<h3>SSH</h3>
+<p>如果想用SecureCRT等终端连接到wsl，需要启用ssh。</p>
+<ol>
+<li>执行<code>ssh-keygen -A</code>以生成默认key，否则sshd会启动失败。</li>
+<li>配置<code>/etc/ssh/sshd_config</code>。<strong>建议<code>UseDNS no</code></strong>。</li>
+<li>根据上一节提供的方法以启用<code>systemctl</code>，执行<code>systemctl start sshd</code>以启动sshd。</li>
+<li><code>systemctl status sshd</code>检查是否运行成功。</li>
+<li>如果希望开机启动sshd，可按以下步骤完成：<ol>
+<li>在wsl下，新建文件<code>/etc/init.wsl</code>：<div class="highlight"><pre><span></span><span class="ch">#! /bin/bash</span>
+service sshd <span class="nv">$1</span>
+</pre></div>
+</li>
+<li>保存文件，并赋予可执行权限<code>chmod +x /etc/init.wsl</code></li>
+<li>在Windows下，<code>WIN+R</code>打开<code>运行</code>对话框，输入<code>shell:startup</code>打开<code>启动</code>目录，新建vbs脚本<code>start_centos_service.vbs</code>：
+<pre><code>Set ws = WScript.CreateObject("WScript.Shell")
+ws.run "wsl -d CentOS7 -u root /etc/init.wsl start", vbhide</code></pre>
+</li>
+<li>Windows重启后，将自动执行该vbs脚本，并完成sshd自启动。</li>
+</ol>
+</li>
 </ol>
 
             </div>
