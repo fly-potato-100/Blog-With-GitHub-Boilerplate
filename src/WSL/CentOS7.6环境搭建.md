@@ -1,5 +1,5 @@
 ---
-layout: draft
+layout: post
 title: CentOS7.6环境搭建
 slug: centos76_env_prepare
 date: 2020-01-09 12:50
