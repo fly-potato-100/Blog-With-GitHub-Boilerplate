@@ -42,7 +42,8 @@ excerpt: 介绍WSL下，CentOS7.6的环境搭建步骤
 
 回到cmd中，进入CentOS7的安装目录下，可以通过命令指定进入wsl时的默认用户：
 `CentOS7.exe config --default-user testuser`。
-  * **tip** 以默认用户进入wsl时，会自动继承Windows的PATH变量，即可以直接使用Windows系统自带的exe命令；非默认用户如果也想继承，只能手动export。
+
+* **tip** 以默认用户进入wsl时，会自动继承Windows的PATH变量，即可以直接使用Windows系统自带的exe命令；非默认用户如果也想继承，只能手动export。
 
 如果想以root用户登录，可以在wsl里，授予用户`sudo su -`权限；也可以直接在cmd中运行以下命令：
 `wsl -u root`。
