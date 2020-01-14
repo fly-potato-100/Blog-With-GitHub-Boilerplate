@@ -19,7 +19,7 @@
     <script>
         var ExSearchConfig = {
             root: "",
-            api: "/Blog-With-GitHub-Boilerplate/3308602758d044717395e147bfe14980.json"
+            api: "/Blog-With-GitHub-Boilerplate/3c34e06e623e0af148b7c3ae3061e31c.json"
         }
     </script>
     
@@ -140,17 +140,22 @@ chmod +x /usr/bin/systemctl <span class="c1"># 增加可执行权限</span>
 <li>配置<code>/etc/ssh/sshd_config</code>。<strong>建议<code>UseDNS no</code></strong>。</li>
 <li>根据上一节提供的方法以启用<code>systemctl</code>，执行<code>systemctl start sshd</code>以启动sshd。</li>
 <li><code>systemctl status sshd</code>检查是否运行成功。</li>
-<li>如果希望开机启动sshd，可按以下步骤完成：<ol>
-<li>在wsl下，新建文件<code>/etc/init.wsl</code>：<div class="highlight"><pre><span></span><span class="ch">#! /bin/bash</span>
-service sshd <span class="nv">$1</span>
+<li><p>如果希望开机启动sshd，可按以下步骤完成：</p>
+<ol>
+<li><p>在wsl下，新建文件<code>/etc/init.wsl</code>：</p>
+<div class="highlight"><pre><span></span><span class="ch">#! /bin/bash</span>
+ service sshd <span class="nv">$1</span>
 </pre></div>
 </li>
-<li>保存文件，并赋予可执行权限<code>chmod +x /etc/init.wsl</code></li>
-<li>在Windows下，<code>WIN+R</code>打开<code>运行</code>对话框，输入<code>shell:startup</code>打开<code>启动</code>目录，新建vbs脚本<code>start_centos_service.vbs</code>：
-<pre><code>Set ws = WScript.CreateObject("WScript.Shell")
-ws.run "wsl -d CentOS7 -u root /etc/init.wsl start", vbhide</code></pre>
+<li><p>保存文件，并赋予可执行权限<code>chmod +x /etc/init.wsl</code></p>
 </li>
-<li>Windows重启后，将自动执行该vbs脚本，并完成sshd自启动。</li>
+<li><p>在Windows下，<code>WIN+R</code>打开<code>运行</code>对话框，输入<code>shell:startup</code>打开<code>启动</code>目录，新建vbs脚本<code>start_centos_service.vbs</code>：</p>
+
+<pre><code> Set ws = WScript.CreateObject("WScript.Shell")
+ ws.run "wsl -d CentOS7 -u root /etc/init.wsl start", vbhide</code></pre>
+</li>
+<li><p>Windows重启后，将自动执行该vbs脚本，并完成sshd自启动。</p>
+</li>
 </ol>
 </li>
 </ol>
