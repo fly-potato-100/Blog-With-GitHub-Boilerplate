@@ -42,7 +42,8 @@ excerpt: 介绍WSL下，CentOS7.6的环境搭建步骤
 
 回到cmd中，进入CentOS7的安装目录下，可以通过命令指定进入wsl时的默认用户：
 `CentOS7.exe config --default-user testuser`。
-  * **tip** 以默认用户进入wsl时，会自动继承Windows的PATH变量，即可以直接使用Windows系统自带的exe命令；非默认用户如果也想继承，只能手动export。
+
+* **tip** 以默认用户进入wsl时，会自动继承Windows的PATH变量，即可以直接使用Windows系统自带的exe命令；非默认用户如果也想继承，只能手动export。
 
 如果想以root用户登录，可以在wsl里，授予用户`sudo su -`权限；也可以直接在cmd中运行以下命令：
 `wsl -u root`。
@@ -52,6 +53,7 @@ excerpt: 介绍WSL下，CentOS7.6的环境搭建步骤
 wsl允许配置`/etc/wsl.conf`以在启动时完成自动配置。（详见[Automatically Configuring WSL](https://devblogs.microsoft.com/commandline/automatically-configuring-wsl/)）
 
 为了能以正常权限将Windows下的盘符挂载到wsl中，可以采用以下wsl.conf：
+
 ```bash
 [automount]
 enabled = true
@@ -67,6 +69,7 @@ mountFsTab = false
 ### systemctl
 
 CentOS的wsl目前无法运行`systemctl`系列命令（据说是wsl底层问题，可能等wsl2发布后会修复）。幸运的是可以借用[docker-systemctl-replacement](https://github.com/gdraheim/docker-systemctl-replacement)实现同样效果。方法如下：
+
 ```bash
 cd /usr/bin
 mv systemctl systemctl.old # 备份下老的
@@ -85,14 +88,18 @@ chmod +x /usr/bin/systemctl # 增加可执行权限
 4. `systemctl status sshd`检查是否运行成功。
 5. 如果希望开机启动sshd，可按以下步骤完成：
     1. 在wsl下，新建文件`/etc/init.wsl`：
-    ```bash
-    #! /bin/bash
-    service sshd $1
-    ```
+
+        ```bash
+        #! /bin/bash
+        service sshd $1
+        ```
+
     2. 保存文件，并赋予可执行权限`chmod +x /etc/init.wsl`
     3. 在Windows下，`WIN+R`打开`运行`对话框，输入`shell:startup`打开`启动`目录，新建vbs脚本`start_centos_service.vbs`：
-    ```vb
-    Set ws = WScript.CreateObject("WScript.Shell")
-    ws.run "wsl -d CentOS7 -u root /etc/init.wsl start", vbhide
-    ```
+
+        ```vb
+        Set ws = WScript.CreateObject("WScript.Shell")
+        ws.run "wsl -d CentOS7 -u root /etc/init.wsl start", vbhide
+        ```
+
     4. Windows重启后，将自动执行该vbs脚本，并完成sshd自启动。
