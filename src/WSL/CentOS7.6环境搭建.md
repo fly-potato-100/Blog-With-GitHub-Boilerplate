@@ -103,3 +103,33 @@ chmod +x /usr/bin/systemctl # 增加可执行权限
         ```
 
     4. Windows重启后，将自动执行该vbs脚本，并完成sshd自启动。
+
+## 卸载
+
+要卸载WSL，进入cmd，执行`wslconfig /u CentOS7`即可。
+
+卸载完毕，如遇到提示`拒绝访问`，猜测是由于Windows无法彻底删除Linux文件系统下创建的文件的缘故。可以使用其他WSL，或者`git bash`，执行`rm -rf <CentOS7解压目录>`即可。
+
+## 备份镜像
+
+有时候我们需要在一台机器上配置好CentOS的环境，然后希望打包成镜像，拷贝到其他机器直接使用，可参考下如下步骤：
+
+* 直接把以下文件和目录打成tar包（wsl自带的backup似乎不好用，不过其实质也是打成tar包）：
+
+    ```bash
+    tar -cvpzf /some/path/to/output/rootfs.tar.gz \
+    --exclude=/proc \
+    --exclude=/tmp/* \
+    --exclude=/mnt \
+    --exclude=/dev \
+    --exclude=/sys \
+    --exclude=/run \
+    --exclude=/media \
+    --exclude=/var/log/* \
+    --exclude=/var/cache/* \
+    --exclude=/init \
+    /*
+    ```
+
+* 将生成的`rootfs.tar.gz`和`CentOS7.exe`一起压成包拷走，即可作为备份镜像。
+* 使用该备份镜像的方法与使用官方包一致。
