@@ -12,12 +12,12 @@ tags:
 excerpt: 为github配置代理以提高访问速度
 ---
 
-[notice]假定代理地址为socks5://127.0.0.1:10808[/notice]
+[notice]假定代理地址为`socks5://127.0.0.1:10808`[/notice]
 
 ## HTTP/HTTPS方式
 
 > 针对`https://github.com/xxxx/xx.git`这样的地址。
-> 
+
 > 使用git本身的配置即可实现。
 
 ```bash
