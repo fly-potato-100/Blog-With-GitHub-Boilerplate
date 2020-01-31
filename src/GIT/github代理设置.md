@@ -18,7 +18,7 @@ excerpt: 为github配置代理以提高访问速度
 
 > 针对`https://github.com/xxxx/xx.git`这样的地址。
 
-> 使用git本身的配置即可实现。
+使用git本身的配置即可实现。
 
 ```bash
 ### 设置全局代理
@@ -37,15 +37,15 @@ git config --global --unset https.proxy
 ## SSH方式
 
 > 针对`git@github.com:xxxx/xx.git`这样的地址。
-> 
-> 使用`~/.ssh/config`的`ProxyCommand`配置实现。
-> 
-> 如果22端口被墙，可以使用[Using SSH over the HTTPS port](https://help.github.com/en/github/authenticating-to-github/using-ssh-over-the-https-port)的方式实现，设置`Hostname ssh.github.com`及`Port 443`即可。
+
+使用`~/.ssh/config`的`ProxyCommand`配置实现。
+
+如果22端口被墙，可以使用[Using SSH over the HTTPS port](https://help.github.com/en/github/authenticating-to-github/using-ssh-over-the-https-port)的方式实现，设置`Hostname ssh.github.com`及`Port 443`即可。
 
 ### Linux/WSL
 
 Linux或WSL下，需要结合`nc`工具使用。增加如下配置：
-    
+
 ```
 Host github.com
     User git
@@ -56,8 +56,8 @@ Host github.com
 
 ### Windows
 
-Windows下，需要结合`git bash`自带的connect工具使用。增加如下配置：
-    
+Windows下，需要结合`git bash`自带的`connect`工具使用。增加如下配置：
+
 ```
 Host github.com
     User git
