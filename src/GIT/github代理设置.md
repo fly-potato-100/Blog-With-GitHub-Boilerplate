@@ -16,7 +16,7 @@ excerpt: 为github配置代理以提高访问速度
 
 ## HTTP/HTTPS方式
 
-> 针对`https://github.com/xxxx/xx.git`这样的地址。
+*针对`https://github.com/xxxx/xx.git`这样的地址。*
 
 使用git本身的配置即可实现。
 
@@ -36,7 +36,7 @@ git config --global --unset https.proxy
 
 ## SSH方式
 
-> 针对`git@github.com:xxxx/xx.git`这样的地址。
+*针对`git@github.com:xxxx/xx.git`这样的地址。*
 
 使用`~/.ssh/config`的`ProxyCommand`配置实现。
 
@@ -68,6 +68,6 @@ Host github.com
 
 ## GIT协议方式
 
-> 针对`git://github.com/xxxx/xx.git`这样的地址。
+*针对`git://github.com/xxxx/xx.git`这样的地址。*
 
 待定
