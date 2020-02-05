@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>豆破苍穹</title><link>/Blog-With-GitHub-Boilerplate/</link><description>不知道说点啥</description><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>/Blog-With-GitHub-Boilerplate/logo.png</url><title>豆破苍穹</title><link>/Blog-With-GitHub-Boilerplate/</link></image><language>zh-CN</language><lastBuildDate>Wed, 05 Feb 2020 09:25:48 +0806</lastBuildDate><pubDate>Wed, 05 Feb 2020 09:25:48 +0806</pubDate><item><title>Hello World!</title><link>/Blog-With-GitHub-Boilerplate/archives/typography/</link><description>&lt;div class="notice"&gt;这是一篇示例文章，在这里你可以看到常用页面元素的显示效果，同时也是 Markdown 语法的参考文章。保留或者删除本文，开始自己的创作吧！&lt;/div&gt;&lt;h2&gt;L2 Heading&lt;/h2&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>豆破苍穹</title><link>/Blog-With-GitHub-Boilerplate/</link><description>不知道说点啥</description><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>/Blog-With-GitHub-Boilerplate/logo.png</url><title>豆破苍穹</title><link>/Blog-With-GitHub-Boilerplate/</link></image><language>zh-CN</language><lastBuildDate>Wed, 05 Feb 2020 13:21:18 +0806</lastBuildDate><pubDate>Wed, 05 Feb 2020 13:21:18 +0806</pubDate><item><title>Hello World!</title><link>/Blog-With-GitHub-Boilerplate/archives/typography/</link><description>&lt;div class="notice"&gt;这是一篇示例文章，在这里你可以看到常用页面元素的显示效果，同时也是 Markdown 语法的参考文章。保留或者删除本文，开始自己的创作吧！&lt;/div&gt;&lt;h2&gt;L2 Heading&lt;/h2&gt;
 &lt;h3&gt;L3 Heading&lt;/h3&gt;
 &lt;h4&gt;L4 Heading&lt;/h4&gt;
 &lt;h5&gt;L5 Heading&lt;/h5&gt;
@@ -157,6 +157,31 @@ chmod +x /usr/bin/systemctl &lt;span class="c1"&gt;# 增加可执行权限&lt;/s
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;h2&gt;卸载&lt;/h2&gt;
+&lt;p&gt;要卸载WSL，进入cmd，执行&lt;code&gt;wslconfig /u CentOS7&lt;/code&gt;即可。&lt;/p&gt;
+&lt;p&gt;卸载完毕，如遇到提示&lt;code&gt;拒绝访问&lt;/code&gt;，猜测是由于Windows无法彻底删除Linux文件系统下创建的文件的缘故。可以使用其他WSL，或者&lt;code&gt;git bash&lt;/code&gt;，执行&lt;code&gt;rm -rf &amp;lt;CentOS7解压目录&amp;gt;&lt;/code&gt;即可。&lt;/p&gt;
+&lt;h2&gt;备份镜像&lt;/h2&gt;
+&lt;p&gt;有时候我们需要在一台机器上配置好CentOS的环境，然后希望打包成镜像，拷贝到其他机器直接使用，可参考下如下步骤：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;直接把以下文件和目录打成tar包（wsl自带的backup似乎不好用，不过其实质也是打成tar包）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;tar -cvpzf /some/path/to/output/rootfs.tar.gz &lt;span class="se"&gt;\&lt;/span&gt;
+  --exclude&lt;span class="o"&gt;=&lt;/span&gt;/proc &lt;span class="se"&gt;\&lt;/span&gt;
+  --exclude&lt;span class="o"&gt;=&lt;/span&gt;/tmp/* &lt;span class="se"&gt;\&lt;/span&gt;
+  --exclude&lt;span class="o"&gt;=&lt;/span&gt;/mnt &lt;span class="se"&gt;\&lt;/span&gt;
+  --exclude&lt;span class="o"&gt;=&lt;/span&gt;/dev &lt;span class="se"&gt;\&lt;/span&gt;
+  --exclude&lt;span class="o"&gt;=&lt;/span&gt;/sys &lt;span class="se"&gt;\&lt;/span&gt;
+  --exclude&lt;span class="o"&gt;=&lt;/span&gt;/run &lt;span class="se"&gt;\&lt;/span&gt;
+  --exclude&lt;span class="o"&gt;=&lt;/span&gt;/media &lt;span class="se"&gt;\&lt;/span&gt;
+  --exclude&lt;span class="o"&gt;=&lt;/span&gt;/var/log/* &lt;span class="se"&gt;\&lt;/span&gt;
+  --exclude&lt;span class="o"&gt;=&lt;/span&gt;/var/cache/* &lt;span class="se"&gt;\&lt;/span&gt;
+  --exclude&lt;span class="o"&gt;=&lt;/span&gt;/init &lt;span class="se"&gt;\&lt;/span&gt;
+  /*
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;将生成的&lt;code&gt;rootfs.tar.gz&lt;/code&gt;和&lt;code&gt;CentOS7.exe&lt;/code&gt;一起压成包拷走，即可作为备份镜像。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;使用该备份镜像的方法与使用官方包一致。&lt;/li&gt;
+&lt;/ul&gt;
 </description><author>sdyk88@gmail.com (None)</author><guid isPermaLink="true">/Blog-With-GitHub-Boilerplate/archives/centos76_env_prepare/</guid><pubDate>Thu, 09 Jan 2020 12:50:00 +0806</pubDate></item><item><title>github代理设置</title><link>/Blog-With-GitHub-Boilerplate/archives/github_proxy_setup/</link><description>&lt;div class="notice"&gt;假定代理地址为&lt;code&gt;socks5://127.0.0.1:10808&lt;/code&gt;&lt;/div&gt;&lt;h2&gt;HTTP/HTTPS方式&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;针对&lt;code&gt;https://github.com/xxxx/xx.git&lt;/code&gt;这样的地址。&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;使用git本身的配置即可实现。&lt;/p&gt;

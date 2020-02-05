@@ -19,7 +19,7 @@
     <script>
         var ExSearchConfig = {
             root: "",
-            api: "/Blog-With-GitHub-Boilerplate/72cf73110efa06bd6d792dc3e15ce1cc.json"
+            api: "/Blog-With-GitHub-Boilerplate/800273600b5813b286d5a36a9a53cbca.json"
         }
     </script>
     
@@ -159,6 +159,31 @@ chmod +x /usr/bin/systemctl <span class="c1"># 增加可执行权限</span>
 </ol>
 </li>
 </ol>
+<h2>卸载</h2>
+<p>要卸载WSL，进入cmd，执行<code>wslconfig /u CentOS7</code>即可。</p>
+<p>卸载完毕，如遇到提示<code>拒绝访问</code>，猜测是由于Windows无法彻底删除Linux文件系统下创建的文件的缘故。可以使用其他WSL，或者<code>git bash</code>，执行<code>rm -rf &lt;CentOS7解压目录&gt;</code>即可。</p>
+<h2>备份镜像</h2>
+<p>有时候我们需要在一台机器上配置好CentOS的环境，然后希望打包成镜像，拷贝到其他机器直接使用，可参考下如下步骤：</p>
+<ul>
+<li><p>直接把以下文件和目录打成tar包（wsl自带的backup似乎不好用，不过其实质也是打成tar包）：</p>
+<div class="highlight"><pre><span></span>tar -cvpzf /some/path/to/output/rootfs.tar.gz <span class="se">\</span>
+  --exclude<span class="o">=</span>/proc <span class="se">\</span>
+  --exclude<span class="o">=</span>/tmp/* <span class="se">\</span>
+  --exclude<span class="o">=</span>/mnt <span class="se">\</span>
+  --exclude<span class="o">=</span>/dev <span class="se">\</span>
+  --exclude<span class="o">=</span>/sys <span class="se">\</span>
+  --exclude<span class="o">=</span>/run <span class="se">\</span>
+  --exclude<span class="o">=</span>/media <span class="se">\</span>
+  --exclude<span class="o">=</span>/var/log/* <span class="se">\</span>
+  --exclude<span class="o">=</span>/var/cache/* <span class="se">\</span>
+  --exclude<span class="o">=</span>/init <span class="se">\</span>
+  /*
+</pre></div>
+</li>
+<li><p>将生成的<code>rootfs.tar.gz</code>和<code>CentOS7.exe</code>一起压成包拷走，即可作为备份镜像。</p>
+</li>
+<li>使用该备份镜像的方法与使用官方包一致。</li>
+</ul>
 
             </div>
         </article>
