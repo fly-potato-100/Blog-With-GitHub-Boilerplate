@@ -19,7 +19,7 @@
     <script>
         var ExSearchConfig = {
             root: "",
-            api: "/Blog-With-GitHub-Boilerplate/800273600b5813b286d5a36a9a53cbca.json"
+            api: "/Blog-With-GitHub-Boilerplate/eaf083f690ed3129c282d74ee3373323.json"
         }
     </script>
     
@@ -101,20 +101,20 @@ git config --global --unset https.proxy
 <p>如果22端口被墙，可以使用<a href="https://help.github.com/en/github/authenticating-to-github/using-ssh-over-the-https-port">Using SSH over the HTTPS port</a>的方式实现，设置<code>Hostname ssh.github.com</code>及<code>Port 443</code>即可。</p>
 <h3>Linux/WSL</h3>
 <p>Linux或WSL下，需要结合<code>nc</code>工具使用。增加如下配置：</p>
-
-<pre><code>Host github.com
+<div class="highlight"><pre><span></span>Host github.com
     User git
     Port 22
     Hostname github.com
-    ProxyCommand nc --proxy-type socks5 --proxy 127.0.0.1:10808 %h %p</code></pre>
+    ProxyCommand nc --proxy-type socks5 --proxy 127.0.0.1:10808 %h %p
+</pre></div>
 <h3>Windows</h3>
 <p>Windows下，需要结合<code>git bash</code>自带的<code>connect</code>工具使用。增加如下配置：</p>
-
-<pre><code>Host github.com
+<div class="highlight"><pre><span></span>Host github.com
     User git
     Port 22
     Hostname github.com
-    ProxyCommand connect -S 127.0.0.1:10808 %h %p</code></pre>
+    ProxyCommand connect -S 127.0.0.1:10808 %h %p
+</pre></div>
 <h2>GIT协议方式</h2>
 <p><em>针对<code>git://github.com/xxxx/xx.git</code>这样的地址。</em></p>
 <p>待定</p>
