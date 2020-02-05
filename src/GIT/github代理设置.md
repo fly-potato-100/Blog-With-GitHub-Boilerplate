@@ -46,7 +46,7 @@ git config --global --unset https.proxy
 
 Linux或WSL下，需要结合`nc`工具使用。增加如下配置：
 
-```
+```text
 Host github.com
     User git
     Port 22
@@ -58,7 +58,7 @@ Host github.com
 
 Windows下，需要结合`git bash`自带的`connect`工具使用。增加如下配置：
 
-```
+```text
 Host github.com
     User git
     Port 22

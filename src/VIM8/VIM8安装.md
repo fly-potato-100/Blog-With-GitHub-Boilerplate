@@ -72,4 +72,4 @@ yum --enablerepo=gf-plus update vim-*
 
 ## 制作自己的RPM包
 
-*略*
+待定
