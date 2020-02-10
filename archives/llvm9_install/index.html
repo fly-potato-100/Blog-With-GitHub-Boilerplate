@@ -23,18 +23,18 @@
         }
     </script>
     
-<title>github代理设置 - 豆破苍穹</title>
+<title>LLVM9安装 - 豆破苍穹</title>
 <meta name="author" content="None" />
-<meta name="description" content="为github配置代理以提高访问速度" />
-<meta property="og:title" content="github代理设置 - 豆破苍穹" />
-<meta property="og:description" content="为github配置代理以提高访问速度" />
+<meta name="description" content="LLVM9的环境准备、编译、安装等" />
+<meta property="og:title" content="LLVM9安装 - 豆破苍穹" />
+<meta property="og:description" content="LLVM9的环境准备、编译、安装等" />
 <meta property="og:site_name" content="豆破苍穹" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/Blog-With-GitHub-Boilerplate/archives/github_proxy_setup/" />
+<meta property="og:url" content="/Blog-With-GitHub-Boilerplate/archives/llvm9_install/" />
 <meta property="og:image" content="" />
-<meta property="article:published_time" content="2020-01-30T22:50:00-00.00" />
-<meta name="twitter:title" content="github代理设置 - 豆破苍穹" />
-<meta name="twitter:description" content="为github配置代理以提高访问速度" />
+<meta property="article:published_time" content="2020-02-10T20:20:00-00.00" />
+<meta name="twitter:title" content="LLVM9安装 - 豆破苍穹" />
+<meta name="twitter:description" content="LLVM9的环境准备、编译、安装等" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:image" content="" />
 
@@ -66,57 +66,57 @@
 <main>    
     <section class="ga-section ga-content">
         <article class="yue">
-            <h1 class="ga-post_title">github代理设置</h1>
+            <h1 class="ga-post_title">LLVM9安装</h1>
             <span class="ga-post_meta ga-mono">
                 <span>None</span>
                 <time>
-                    2020-01-30
+                    2020-02-10
                 </time>
                 
-                in <a no-style class="category" href="/Blog-With-GitHub-Boilerplate/category/GIT/">
-                    GIT
+                in <a no-style class="category" href="/Blog-With-GitHub-Boilerplate/category/LLVM/">
+                    LLVM
                 </a>
                 
                 
             </span>
             <div class="ga-content_body">
-                <div class="notice">假定代理地址为<code>socks5://127.0.0.1:10808</code></div><h2>HTTP/HTTPS方式</h2>
-<p><em>针对<code>https://github.com/xxxx/xx.git</code>这样的地址。</em></p>
-<p>使用git本身的配置即可实现。</p>
-<div class="highlight"><pre><span></span><span class="c1">### 设置全局代理</span>
-git config --global http.proxy <span class="s1">&#39;socks5://127.0.0.1:10808&#39;</span>
-git config --global https.proxy <span class="s1">&#39;socks5://127.0.0.1:10808&#39;</span>
-
-<span class="c1">### 只对github.com</span>
-git config --global http.https://github.com.proxy <span class="s1">&#39;socks5://127.0.0.1:10808&#39;</span>
-git config --global https.https://github.com.proxy <span class="s1">&#39;socks5://127.0.0.1:10808&#39;</span>
-
-<span class="c1">### 取消代理</span>
-git config --global --unset http.proxy
-git config --global --unset https.proxy
+                <h2>系统环境</h2>
+<ul>
+<li>Windows 10 1809</li>
+<li><a href="https://github.com/yuk7/CentWSL">CentWSL 7.6</a></li>
+</ul>
+<h2>使用yum安装</h2>
+<p>scl中包含的最新版本是<strong>llvm-toolset-7.0</strong>，其中clang的版本是7.0.1，比较老。如果仅用来进行C++17的开发，已经足够。</p>
+<p>若要使用最新的特性，还需从源码编译安装。</p>
+<h2>从源码安装</h2>
+<p><em>llvm的工程迭代比较快，当前10的预览版已经发布，本文选用最新的稳定版9.0.1。</em></p>
+<ol>
+<li><p>安装编译依赖，包括但不限于：</p>
+<div class="highlight"><pre><span></span>yum install libedit-devel swig3
 </pre></div>
-<h2>SSH方式</h2>
-<p><em>针对<code>git@github.com:xxxx/xx.git</code>这样的地址。</em></p>
-<p>使用<code>~/.ssh/config</code>的<code>ProxyCommand</code>配置实现。</p>
-<p>如果22端口被墙，可以使用<a href="https://help.github.com/en/github/authenticating-to-github/using-ssh-over-the-https-port">Using SSH over the HTTPS port</a>的方式实现，设置<code>Hostname ssh.github.com</code>及<code>Port 443</code>即可。</p>
-<h3>Linux/WSL</h3>
-<p>Linux或WSL下，需要结合<code>nc</code>工具使用。增加如下配置：</p>
-<div class="highlight"><pre><span></span>Host github.com
-    User git
-    Port 22
-    Hostname github.com
-    ProxyCommand nc --proxy-type socks5 --proxy 127.0.0.1:10808 %h %p
+</li>
+<li><p>下载<a href="https://github.com/llvm/llvm-project.git">LLVM源码</a>，本例使用的tag是llvmorg-9.0.1。</p>
+</li>
+<li><p>按下面步骤编译安装：</p>
+<div class="highlight"><pre><span></span><span class="c1"># 进入到源码根目录下</span>
+ mkdir build
+ <span class="nb">cd</span> build
+ <span class="c1"># 使用cmake安装</span>
+ <span class="c1"># LLVM_ENABLE_PROJECTS包含了需要编译的项目，根据需要增删</span>
+ cmake -DCMAKE_BUILD_TYPE<span class="o">=</span>Release <span class="se">\</span>
+     -DCMAKE_INSTALL_PREFIX<span class="o">=</span>/opt/llvm-9.0.1 <span class="se">\</span>
+     -DLLVM_TARGETS_TO_BUILD<span class="o">=</span>X86 <span class="se">\</span>
+     -DLLVM_ENABLE_PROJECTS<span class="o">=</span><span class="s2">&quot;clang;clang-tools-extra;libcxx;libcxxabi;libunwind;lldb;compiler-rt;lld&quot;</span> <span class="se">\</span>
+     ../llvm/
+ make -j8
+ make install
 </pre></div>
-<h3>Windows</h3>
-<p>Windows下，需要结合<code>git bash</code>自带的<code>connect</code>工具使用。增加如下配置：</p>
-<div class="highlight"><pre><span></span>Host github.com
-    User git
-    Port 22
-    Hostname github.com
-    ProxyCommand connect -S 127.0.0.1:10808 %h %p
-</pre></div>
-<h2>GIT协议方式</h2>
-<p><em>针对<code>git://github.com/xxxx/xx.git</code>这样的地址。</em></p>
+</li>
+<li><p>增加<code>/opt/llvm-9.0.1</code>下的各个目录到环境变量中。</p>
+</li>
+<li>如要卸载，删掉<code>/opt/llvm-9.0.1</code>目录，还原步骤5的操作即可。</li>
+</ol>
+<h2>制作自己的RPM包</h2>
 <p>待定</p>
 
             </div>
@@ -124,15 +124,15 @@ git config --global --unset https.proxy
         <div id="ga-tags">
     
     <span class="ga-tag">
-        <a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/tag/git/">#git</a>
+        <a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/tag/clang/">#clang</a>
     </span>
     
     <span class="ga-tag">
-        <a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/tag/github/">#github</a>
+        <a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/tag/c++17/">#c++17</a>
     </span>
     
     <span class="ga-tag">
-        <a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/tag/科学上网/">#科学上网</a>
+        <a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/tag/llvm/">#llvm</a>
     </span>
     
 </div>
@@ -142,14 +142,14 @@ git config --global --unset https.proxy
 <section id="ga-content_pager">
 
     <div class="next">
-        <a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/archives/vim8_install/">VIM8安装</a>
-        <p class="yue">VIM8的环境准备、编译、安装等</p>
+        <h3>没有了</h3>
+        <p class="yue">这是最新的文章</p>
     </div>
 
 
     <div class="prev">
-        <a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/archives/centos76_env_prepare/">CentOS7.6环境搭建</a>
-        <p class="yue">介绍WSL下，CentOS7.6的环境搭建步骤</p>
+        <a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/archives/vim8_install/">VIM8安装</a>
+        <p class="yue">VIM8的环境准备、编译、安装等</p>
     </div>
 
 </section>
