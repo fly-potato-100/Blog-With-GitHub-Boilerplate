@@ -50,15 +50,16 @@ yum --enablerepo=gf-plus update vim-*
     yum install ruby-devel  # ruby插件支持
     ```
 
-3. 下载[VIM源码](https://github.com/vim/vim)，本例使用的tag是v8.2.0210。
+3. 下载[VIM源码](https://github.com/vim/vim)，本例使用的tag是v8.2.0236。
 4. 按下面步骤编译安装：
 
     ```bash
     # 进入到源码根目录下
+    # 注意python和python3最好2选1，不要同时安装，以免出现奇怪的加载问题
+    # 2020年之后python2停止维护了，所以这里使用python3
     ./configure --enable-multibyte --enable-cscope \
         --enable-luainterp=yes \
         --enable-perlinterp=yes \
-        --enable-pythoninterp=yes \
         --enable-python3interp=yes \
         --enable-rubyinterp=yes \
         --prefix=/opt/vim   # 安装到/opt/vim下
