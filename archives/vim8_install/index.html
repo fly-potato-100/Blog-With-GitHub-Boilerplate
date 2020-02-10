@@ -19,7 +19,7 @@
     <script>
         var ExSearchConfig = {
             root: "",
-            api: "/Blog-With-GitHub-Boilerplate/eaf083f690ed3129c282d74ee3373323.json"
+            api: "/Blog-With-GitHub-Boilerplate/656187c9fe02d1402cb9a8670443891e.json"
         }
     </script>
     
@@ -109,14 +109,15 @@ yum --enablerepo<span class="o">=</span>gf-plus update vim-*
  yum install ruby-devel  <span class="c1"># ruby插件支持</span>
 </pre></div>
 </li>
-<li><p>下载<a href="https://github.com/vim/vim">VIM源码</a>，本例使用的tag是v8.2.0210。</p>
+<li><p>下载<a href="https://github.com/vim/vim">VIM源码</a>，本例使用的tag是v8.2.0236。</p>
 </li>
 <li><p>按下面步骤编译安装：</p>
 <div class="highlight"><pre><span></span><span class="c1"># 进入到源码根目录下</span>
+ <span class="c1"># 注意python和python3最好2选1，不要同时安装，以免出现奇怪的加载问题</span>
+ <span class="c1"># 2020年之后python2停止维护了，所以这里使用python3</span>
  ./configure --enable-multibyte --enable-cscope <span class="se">\</span>
      --enable-luainterp<span class="o">=</span>yes <span class="se">\</span>
      --enable-perlinterp<span class="o">=</span>yes <span class="se">\</span>
-     --enable-pythoninterp<span class="o">=</span>yes <span class="se">\</span>
      --enable-python3interp<span class="o">=</span>yes <span class="se">\</span>
      --enable-rubyinterp<span class="o">=</span>yes <span class="se">\</span>
      --prefix<span class="o">=</span>/opt/vim   <span class="c1"># 安装到/opt/vim下</span>
