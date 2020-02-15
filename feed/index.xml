@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>豆破苍穹</title><link>/Blog-With-GitHub-Boilerplate/</link><description>不知道说点啥</description><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>/Blog-With-GitHub-Boilerplate/logo.png</url><title>豆破苍穹</title><link>/Blog-With-GitHub-Boilerplate/</link></image><language>zh-CN</language><lastBuildDate>Sat, 15 Feb 2020 08:21:33 +0806</lastBuildDate><pubDate>Sat, 15 Feb 2020 08:21:33 +0806</pubDate><item><title>Hello World!</title><link>/Blog-With-GitHub-Boilerplate/archives/typography/</link><description>&lt;div class="notice"&gt;这是一篇示例文章，在这里你可以看到常用页面元素的显示效果，同时也是 Markdown 语法的参考文章。保留或者删除本文，开始自己的创作吧！&lt;/div&gt;&lt;h2&gt;L2 Heading&lt;/h2&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>豆破苍穹</title><link>/Blog-With-GitHub-Boilerplate/</link><description>不知道说点啥</description><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>/Blog-With-GitHub-Boilerplate/logo.png</url><title>豆破苍穹</title><link>/Blog-With-GitHub-Boilerplate/</link></image><language>zh-CN</language><lastBuildDate>Sat, 15 Feb 2020 08:40:52 +0806</lastBuildDate><pubDate>Sat, 15 Feb 2020 08:40:52 +0806</pubDate><item><title>Hello World!</title><link>/Blog-With-GitHub-Boilerplate/archives/typography/</link><description>&lt;div class="notice"&gt;这是一篇示例文章，在这里你可以看到常用页面元素的显示效果，同时也是 Markdown 语法的参考文章。保留或者删除本文，开始自己的创作吧！&lt;/div&gt;&lt;h2&gt;L2 Heading&lt;/h2&gt;
 &lt;h3&gt;L3 Heading&lt;/h3&gt;
 &lt;h4&gt;L4 Heading&lt;/h4&gt;
 &lt;h5&gt;L5 Heading&lt;/h5&gt;
@@ -324,7 +324,7 @@ yum --enablerepo&lt;span class="o"&gt;=&lt;/span&gt;gf-plus update vim-*
 &lt;h3&gt;VIM&lt;/h3&gt;
 &lt;p&gt;使用 &lt;strong&gt;VIM8.2&lt;/strong&gt; 以上版本，必须确保&lt;code&gt;vim --version&lt;/code&gt;中的feature里带有 &lt;strong&gt;+python3&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;因2020-01-01后，python2停止维护，建议开发机上也尽量切换到python3环境，以避免混乱。&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;详见&lt;a href="./VIM8安装.md"&gt;VIM8安装&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;详见&lt;a href="./VIM8/VIM8安装.md"&gt;VIM8安装&lt;/a&gt;。&lt;/p&gt;
 &lt;h3&gt;插件管理器&lt;/h3&gt;
 &lt;p&gt;因为要考虑在内网环境下使用，很多常用的如Vundle、&lt;a href="https://github.com/junegunn/vim-plug"&gt;vim-plug&lt;/a&gt;等插件管理器的下载和更新功能，都难以发挥作用。&lt;/p&gt;
 &lt;p&gt;考察过VIM8之后的packages功能后，决定采用之（毕竟是VIM自带新特性，还省掉一个插件）。&lt;/p&gt;
@@ -362,7 +362,7 @@ yum --enablerepo&lt;span class="o"&gt;=&lt;/span&gt;gf-plus update vim-*
 &lt;h3&gt;LLVM9&lt;/h3&gt;
 &lt;p&gt;供YouCompleteMe的C++语义补全使用，强烈推荐9.0之后的版本，以避免奇奇怪怪的问题。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;LLVM的完整编译比较费时费力，如果接受不了，YCM自带的符号补全其实已经很不错。&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;详见&lt;a href="../LLVM/LLVM9安装.md"&gt;LLVM9安装&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;详见&lt;a href="./LLVM/LLVM9安装.md"&gt;LLVM9安装&lt;/a&gt;。&lt;/p&gt;
 &lt;h2&gt;插件安装&lt;/h2&gt;
 &lt;p&gt;得益于vim8自带的packages特性，插件目录只需下载到&lt;code&gt;$HOME/.vim/pack/default/start/&lt;/code&gt;下即可自动加载，无需额外配置。&lt;/p&gt;
 &lt;p&gt;如果是可选插件（在vimrc中通过&lt;code&gt;packadd&lt;/code&gt;命令加载），可以放到&lt;code&gt;$HOME/.vim/pack/default/opt/&lt;/code&gt;下。&lt;/p&gt;
