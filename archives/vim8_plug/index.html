@@ -1,0 +1,294 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Maverick,Galileo,blog" />
+    <meta name="generator" content="Maverick 1.1" />
+    <meta name="template" content="Galileo" />
+    <link rel="alternate" type="application/rss+xml" title="豆破苍穹 &raquo; RSS 2.0" href="/Blog-With-GitHub-Boilerplate/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="豆破苍穹 &raquo; ATOM 1.0" href="/Blog-With-GitHub-Boilerplate/feed/atom/index.xml" />
+    <link rel="stylesheet" href="/Blog-With-GitHub-Boilerplate/assets/galileo-3f4dcc35c9.css">
+    <link rel="stylesheet" href="/Blog-With-GitHub-Boilerplate/assets/ExSearch/ExSearch-182e5a8868.css">
+    <link rel="stylesheet" href="/Blog-With-GitHub-Boilerplate/assets/katex.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700&display=swap">
+    <script>
+        var ExSearchConfig = {
+            root: "",
+            api: "/Blog-With-GitHub-Boilerplate/7bbf82b867b70b5c8677d4e562d223a9.json"
+        }
+    </script>
+    
+<title>VIM8插件整理 - 豆破苍穹</title>
+<meta name="author" content="None" />
+<meta name="description" content="VIM8的插件安装、配置等，C++开发相关" />
+<meta property="og:title" content="VIM8插件整理 - 豆破苍穹" />
+<meta property="og:description" content="VIM8的插件安装、配置等，C++开发相关" />
+<meta property="og:site_name" content="豆破苍穹" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/Blog-With-GitHub-Boilerplate/archives/vim8_plug/" />
+<meta property="og:image" content="" />
+<meta property="article:published_time" content="2020-02-14T20:20:00-00.00" />
+<meta name="twitter:title" content="VIM8插件整理 - 豆破苍穹" />
+<meta name="twitter:description" content="VIM8的插件安装、配置等，C++开发相关" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="" />
+
+
+    
+<meta http-equiv="x-dns-prefetch-control" content="on">
+<link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
+
+    </head>
+    
+    <body>
+        
+        <div class="container">
+            <header id="ga-header">
+                <div first>
+                    <aside id="ga-brand">
+                        <h1 class="brand"><a class="no-style" href="/Blog-With-GitHub-Boilerplate/">豆破苍穹</a></h1>
+                        <p>不知道说点啥</p>
+                    </aside>
+                </div>
+                <div second id="ga-nav">
+                    <nav class="navs">
+                        <ul><li><a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/" target="_self">首页</a></li><span class="separator">·</span><li><a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/archives/" target="_self">归档</a></li><span class="separator">·</span><li><a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/about/" target="_self">关于</a></li><span class="separator">·</span><li><a href="#" target="_self" class="search-form-input ga-highlight">搜索</a></li></ul>
+                    </nav>
+                </div>
+            </header>
+            <div class="wrapper">
+                
+<main>    
+    <section class="ga-section ga-content">
+        <article class="yue">
+            <h1 class="ga-post_title">VIM8插件整理</h1>
+            <span class="ga-post_meta ga-mono">
+                <span>None</span>
+                <time>
+                    2020-02-14
+                </time>
+                
+                in <a no-style class="category" href="/Blog-With-GitHub-Boilerplate/category/VIM8/">
+                    VIM8
+                </a>
+                
+                
+            </span>
+            <div class="ga-content_body">
+                <h2>前言</h2>
+<p>已经到了2020年，VIM很多插件都是基于8.0之后的异步特性，迭代出了新的效果。</p>
+<p>本文围绕C++开发，挑选了一些知名插件，重做整理。</p>
+<p>因为要考虑封闭网络内的开发环境，方便更新拷贝，插件尽量选择简而精、且持续维护的老牌插件，花里胡哨的功能能不要就不要，务求 <strong>简洁耐用</strong> 。</p>
+<hr>
+<h2>系统环境</h2>
+<ul>
+<li>Windows 10 1809</li>
+<li><a href="https://github.com/yuk7/CentWSL">CentWSL 7.6</a></li>
+</ul>
+<h2>依赖</h2>
+<h3>VIM</h3>
+<p>使用 <strong>VIM8.2</strong> 以上版本，必须确保<code>vim --version</code>中的feature里带有 <strong>+python3</strong>。</p>
+<p><em>因2020-01-01后，python2停止维护，建议开发机上也尽量切换到python3环境，以避免混乱。</em></p>
+<p>详见<a href="./VIM8安装.md">VIM8安装</a>。</p>
+<h3>插件管理器</h3>
+<p>因为要考虑在内网环境下使用，很多常用的如Vundle、<a href="https://github.com/junegunn/vim-plug">vim-plug</a>等插件管理器的下载和更新功能，都难以发挥作用。</p>
+<p>考察过VIM8之后的packages功能后，决定采用之（毕竟是VIM自带新特性，还省掉一个插件）。</p>
+<p>再利用<code>git submodule</code>按照基于packages的目录布局，上传github。插件目录布局大概如下：</p>
+<div class="highlight"><pre><span></span>$ tree -L <span class="m">4</span>
+.
+├── pack
+│   └── default
+│       ├── opt
+│       │   ├── vim-cpp-enhanced-highlight
+│       │   └── YouCompleteMe
+│       └── start
+│           ├── gruvbox
+│           ├── LeaderF
+│           ├── nerdtree
+│           ├── tagbar
+│           └── vim-airline
+...
+</pre></div>
+<p>clone或更新到本地后直接使用即可，暂无问题。</p>
+<p>packages的特性还在摸索，今后会持续关注。</p>
+<h3>ripgrep</h3>
+<p>LeaderF推荐的grep替代品，真的是快出天际的速度，墙裂推荐！</p>
+<p>安装方法参照官方<a href="https://github.com/BurntSushi/ripgrep#installation">ripgrep</a>。</p>
+<h3>universal-ctags</h3>
+<p>老Exuberant-Ctags的替代品，C++项目必备，很多插件都需要有这个。</p>
+<p><em>yum源上的老版ctags不要使用。</em></p>
+<p>安装方法参照官方<a href="https://github.com/universal-ctags/ctags">universal-ctags</a>。</p>
+<h3>GNU Global</h3>
+<p>gtags + pygments搭配使用用来生成引用tags，C++项目必备，也是老牌知名工具了。</p>
+<p><em>gtags是Global的一个生成tag的工具，pygments是第三方的一套扩展，用以支持更多语言的tag生成。</em></p>
+<p>安装后记得安装pygments：<code>pip3 install pygments</code>。</p>
+<p><em>yum源上的版本太老，建议从源码编译安装。</em></p>
+<p>安装方法参照官方<a href="https://www.gnu.org/software/global/download.html">GNU Global</a></p>
+<h3>LLVM9</h3>
+<p>供YouCompleteMe的C++语义补全使用，强烈推荐9.0之后的版本，以避免奇奇怪怪的问题。</p>
+<p><em>LLVM的完整编译比较费时费力，如果接受不了，YCM自带的符号补全其实已经很不错。</em></p>
+<p>详见<a href="../LLVM/LLVM9安装.md">LLVM9安装</a>。</p>
+<h2>插件安装</h2>
+<p>得益于vim8自带的packages特性，插件目录只需下载到<code>$HOME/.vim/pack/default/start/</code>下即可自动加载，无需额外配置。</p>
+<p>如果是可选插件（在vimrc中通过<code>packadd</code>命令加载），可以放到<code>$HOME/.vim/pack/default/opt/</code>下。</p>
+<p><em>详见vim8帮助文档，<code>:help packages</code>。</em></p>
+<h3><a href="https://github.com/morhetz/gruvbox">gruvbox</a></h3>
+<p>备受欢迎的颜色主题，下载即用，不用配置。</p>
+<p>喜欢暗色背景的（比如我）可以设置如下：</p>
+<div class="highlight"><pre><span></span><span class="nb">set</span> <span class="nv">background</span><span class="o">=</span>dark
+</pre></div>
+<h3><a href="https://github.com/preservim/nerdtree">NERDTree</a></h3>
+<p>老牌文件管理插件了。</p>
+<p>设置快捷键映射如下：</p>
+<div class="highlight"><pre><span></span>nnoremap &lt;F3&gt; :NERDTreeToggle&lt;CR&gt;
+</pre></div>
+<p>进一步可以自行搭配其他衍生插件，比如<a href="https://github.com/Xuyuanp/nerdtree-git-plugin">nerdtree-git-plugin</a>等</p>
+<h3><a href="https://github.com/majutsushi/tagbar">tagbar</a></h3>
+<p>显示文件大纲的经典插件。</p>
+<p>设置快捷键映射如下：</p>
+<div class="highlight"><pre><span></span>nnoremap &lt;F4&gt; :TagbarToggle&lt;CR&gt;
+</pre></div>
+<p>注意需要先安装<code>ctags</code>。</p>
+<h3><a href="https://github.com/vim-airline/vim-airline">AirLine</a></h3>
+<p>状态栏美化，扩展和衍生插件很多，使用方法见仁见智。</p>
+<h3><a href="https://github.com/Yggdroot/LeaderF">LeaderF</a></h3>
+<p>国人设计的模糊查找插件。</p>
+<p>查找文件（类似CtrlP）、查找字符串（相当于grep）、甚至最近开始支持的查找tag（基于gtags）。功能越来越全，性能出色，强烈推荐！</p>
+<p>注意使用gtags查找tag的时候，最好设置：</p>
+<div class="highlight"><pre><span></span><span class="nb">let</span> g:Lf_Gtagslabel <span class="o">=</span> <span class="s1">&#39;pygments&#39;</span>
+</pre></div>
+<p>对查定义和查引用都有不错的支持（尤其对C++新标准）。</p>
+<p>相比之下，<code>'native'</code>对C++新标准支持不好（一些关键字识不准）；<code>'new-ctags'</code>虽然使用了<code>universal-tags</code>但不支持引用。综合下来建议还是使用<code>'pygments'</code>。</p>
+<p>记得先安装<strong>ripgrep</strong>，LeaderF使用其<code>rg</code>命令来查找，比grep快很多，在巨型项目中也有良好表现。</p>
+<h3><a href="https://github.com/ycm-core/YouCompleteMe">YouCompleteMe</a></h3>
+<p>大名鼎鼎的自动补全插件，最好用的C++补全，没有之一。</p>
+<p>缺点是安装LLVM很不省心，尤其是在内网开发机上，只为了一个语义补全，就要编译几个G的LLVM，令人不爽。</p>
+<p>我个人的感受是，使用LeaderF查找定义和引用，YCM仅作符号补全放弃语义补全，依然可以接受。</p>
+<p>如果要使用C++语义补全，YCM支持两种语义分析引擎（都需要已安装<strong>LLVM9</strong>）：</p>
+<ul>
+<li><p>libclang。安装时执行：</p>
+<div class="highlight"><pre><span></span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/path/to/llvm9/lib/:<span class="nv">$LD_LIBRARY_PATH</span> python3 install.py --clang-completer --system-libclang
+</pre></div>
+<p>实测发现该方法在较大项目中表现不佳。</p>
+</li>
+<li><p>clangd（实验中）。安装时直接执行：</p>
+<div class="highlight"><pre><span></span>python3 install.py
+</pre></div>
+<p>然后在vimrc中设置如下：</p>
+<div class="highlight"><pre><span></span><span class="nb">let</span> g:ycm_use_clangd <span class="o">=</span> <span class="m">1</span>
+  <span class="nb">let</span> g:ycm_clangd_binary_path <span class="o">=</span> <span class="s1">&#39;/path/to/llvm9/bin/clangd&#39;</span>
+</pre></div>
+<p>虽然该引擎还处于experiment阶段，不过总体表现好于libclang，并且安装时无需额外依赖，可以安装完随时开关，推荐使用该方法。</p>
+</li>
+</ul>
+<p>总体来说，YCM的C++语义补全，在项目较小时表现尚可，大项目都不甚理想，速度慢、崩溃时有发生，目前仅能算是个锦上添花。</p>
+<h3><a href="https://github.com/octol/vim-cpp-enhanced-highlight">cpp enhanced highlight</a></h3>
+<p>针对C++语言专门做的高亮插件，不完美，但是可以用，另外不要指望在模板方面有出色表现。</p>
+<h2>VIM配置</h2>
+<p>详见<a href="https://github.com/fly-potato-100/config4vim">我的自用配置</a>中的vimrc。</p>
+
+            </div>
+        </article>
+        <div id="ga-tags">
+    
+    <span class="ga-tag">
+        <a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/tag/VIM/">#VIM</a>
+    </span>
+    
+    <span class="ga-tag">
+        <a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/tag/C++/">#C++</a>
+    </span>
+    
+    <span class="ga-tag">
+        <a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/tag/clangd/">#clangd</a>
+    </span>
+    
+    <span class="ga-tag">
+        <a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/tag/llvm/">#llvm</a>
+    </span>
+    
+    <span class="ga-tag">
+        <a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/tag/gtags/">#gtags</a>
+    </span>
+    
+    <span class="ga-tag">
+        <a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/tag/universal-ctags/">#universal-ctags</a>
+    </span>
+    
+</div>
+    </section>
+
+    
+<section id="ga-content_pager">
+
+    <div class="next">
+        <h3>没有了</h3>
+        <p class="yue">这是最新的文章</p>
+    </div>
+
+
+    <div class="prev">
+        <a class="ga-highlight" href="/Blog-With-GitHub-Boilerplate/archives/llvm9_install/">LLVM9安装</a>
+        <p class="yue">LLVM9的环境准备、编译、安装等</p>
+    </div>
+
+</section>
+
+
+    
+
+</main>
+
+                <footer class="ga-mono" id="ga-footer">
+                    <section>
+                        <span id="ga-uptime"></span>
+                        <span class="brand">豆破苍穹</span>
+                    </section>
+                    <section>
+                        <p class="copyright">
+                            <span>Copyright © 2020 飞奔的土豆</span>
+                            <span>Powered by <a no-style href="https://github.com/AlanDecode/Maverick" target="_blank">Maverick & Galileo</a></span>
+                        </p>
+                        <div class="copyright">
+                            <span class="footer-addon">
+                                
+                            </span>
+                            <nav class="social-links">
+                                <ul><li><a class="no-style" title="GitHub" href="https://github.com/AlanDecode" target="_blank"><i class="gi gi-github"></i>GitHub</a></li></ul>
+                            </nav>
+                        </div>
+                    </section>
+                    <script>
+                        var site_build_date = "2020-01-08T16:01+08:00"
+                    </script>
+                    <script src="/Blog-With-GitHub-Boilerplate/assets/galileo-dc4baa7cf4.js"></script>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <!--katex-->
+    <script defer src="/Blog-With-GitHub-Boilerplate/assets/katex.min.js"></script>
+    <script>
+    mathOpts = {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "\\[", right: "\\]", display: true},
+            {left: "$", right: "$", display: false},
+            {left: "\\(", right: "\\)", display: false}
+        ]
+    };
+    </script>
+    <script defer src="/Blog-With-GitHub-Boilerplate/assets/auto-render.min.js" onload="renderMathInElement(document.body, mathOpts);"></script>
+
+    <script src="/Blog-With-GitHub-Boilerplate/assets/ExSearch/jquery.min.js"></script>
+    <script src="/Blog-With-GitHub-Boilerplate/assets/ExSearch/ExSearch-493cb9cd89.js"></script>
+
+    
+    </body>
+</html>
