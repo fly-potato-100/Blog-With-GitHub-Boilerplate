@@ -38,7 +38,7 @@ excerpt: VIM8的插件安装、配置等，C++开发相关
 
 *因2020-01-01后，python2停止维护，建议开发机上也尽量切换到python3环境，以避免混乱。*
 
-详见[VIM8安装](./VIM8/VIM8安装.md)。
+详见[VIM8安装](../vim8_install)。
 
 ### 插件管理器
 
@@ -101,7 +101,7 @@ gtags + pygments搭配使用用来生成引用tags，C++项目必备，也是老
 
 *LLVM的完整编译比较费时费力，如果接受不了，YCM自带的符号补全其实已经很不错。*
 
-详见[LLVM9安装](./LLVM/LLVM9安装.md)。
+详见[LLVM9安装](../llvm9_install)。
 
 ## 插件安装
 
