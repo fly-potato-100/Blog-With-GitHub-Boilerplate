@@ -30,6 +30,7 @@ excerpt: 介绍WSL下，CentOS7.6的环境搭建步骤
 3. 双击exe等待安装完成。
 4. 安装完成后双击exe，或者cmd中输入wsl（如果当前distro是唯一的wsl实例的话），就可以进入到CentOS的shell中了。
     * **tip** 在cmd中，输入`wslconfig /l`可以查看当前安装了哪些distro实例；输入`wslconfig /s CentOS7`可以将wsl默认实例改为CentOS7。
+    * **tip** 如果是1903之后的windows版本，直接使用`wsl --help`查看相关命令。
 
 ## 一些设置和优化
 
@@ -45,7 +46,7 @@ excerpt: 介绍WSL下，CentOS7.6的环境搭建步骤
 
 * **tip** 以默认用户进入wsl时，会自动继承Windows的PATH变量，即可以直接使用Windows系统自带的exe命令；非默认用户如果也想继承，只能手动export。
 
-如果想以root用户登录，可以在wsl里，授予用户`sudo su -`权限；也可以直接在cmd中运行以下命令：
+如果想以root用户登录，可以在wsl里，授予用户`sudo su -`权限（或者在root下`passwd -d root`删掉root密码，可以直接使用`su -`切换）；也可以直接在cmd中运行以下命令：
 `wsl -u root`。
 
 ### WSL启动配置
@@ -78,6 +79,29 @@ mv /tmp/systemctl.py /usr/bin/systemctl
 chmod +x /usr/bin/systemctl # 增加可执行权限
 ```
 
+### systemd与开机启动
+
+wsl本身没有开机启动的概念，所以并不会走完整的initd，systemd也不会初始化(这可能会导致ptrace不能正常工作、共享内存参数设置失败等问题)。
+可以通过下面的步骤来workaround：
+
+1. 在wsl下，新建文件`/etc/init.wsl`：
+
+    ```bash
+    #! /bin/bash
+    ### 启动systemd相关初始化
+    service systemd-sysctl $1
+    ```
+
+2. 保存文件，并赋予可执行权限`chmod +x /etc/init.wsl`
+3. 在Windows下，`WIN+R`打开`运行`对话框，输入`shell:startup`打开`启动`目录，新建vbs脚本`start_centos_service.vbs`：
+
+    ```vb
+    Set ws = WScript.CreateObject("WScript.Shell")
+    ws.run "wsl -d CentOS7 -u root /etc/init.wsl start", vbhide
+    ```
+
+4. Windows重启后，将自动执行该vbs脚本，并借助systemd-sysctl进行初始化。
+
 ### SSH
 
 如果想用SecureCRT等终端连接到wsl，需要启用ssh。
@@ -86,23 +110,7 @@ chmod +x /usr/bin/systemctl # 增加可执行权限
 2. 配置`/etc/ssh/sshd_config`。**建议`UseDNS no`**。
 3. 根据上一节提供的方法以启用`systemctl`，执行`systemctl start sshd`以启动sshd。
 4. `systemctl status sshd`检查是否运行成功。
-5. 如果希望开机启动sshd，可按以下步骤完成：
-    1. 在wsl下，新建文件`/etc/init.wsl`：
-
-        ```bash
-        #! /bin/bash
-        service sshd $1
-        ```
-
-    2. 保存文件，并赋予可执行权限`chmod +x /etc/init.wsl`
-    3. 在Windows下，`WIN+R`打开`运行`对话框，输入`shell:startup`打开`启动`目录，新建vbs脚本`start_centos_service.vbs`：
-
-        ```vb
-        Set ws = WScript.CreateObject("WScript.Shell")
-        ws.run "wsl -d CentOS7 -u root /etc/init.wsl start", vbhide
-        ```
-
-    4. Windows重启后，将自动执行该vbs脚本，并完成sshd自启动。
+5. 如果希望开机启动sshd，可以在前述的`/etc/init.wsl`中加入`service sshd $1`
 
 ## 卸载
 
