@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>豆破苍穹</title><link>/Blog-With-GitHub-Boilerplate/</link><description>不知道说点啥</description><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>/Blog-With-GitHub-Boilerplate/logo.png</url><title>豆破苍穹</title><link>/Blog-With-GitHub-Boilerplate/</link></image><language>zh-CN</language><lastBuildDate>Sat, 15 Feb 2020 08:46:45 +0806</lastBuildDate><pubDate>Sat, 15 Feb 2020 08:46:45 +0806</pubDate><item><title>Hello World!</title><link>/Blog-With-GitHub-Boilerplate/archives/typography/</link><description>&lt;div class="notice"&gt;这是一篇示例文章，在这里你可以看到常用页面元素的显示效果，同时也是 Markdown 语法的参考文章。保留或者删除本文，开始自己的创作吧！&lt;/div&gt;&lt;h2&gt;L2 Heading&lt;/h2&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>豆破苍穹</title><link>/Blog-With-GitHub-Boilerplate/</link><description>不知道说点啥</description><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>/Blog-With-GitHub-Boilerplate/logo.png</url><title>豆破苍穹</title><link>/Blog-With-GitHub-Boilerplate/</link></image><language>zh-CN</language><lastBuildDate>Sun, 30 Aug 2020 11:03:03 +0806</lastBuildDate><pubDate>Sun, 30 Aug 2020 11:03:03 +0806</pubDate><item><title>Hello World!</title><link>/Blog-With-GitHub-Boilerplate/archives/typography/</link><description>&lt;div class="notice"&gt;这是一篇示例文章，在这里你可以看到常用页面元素的显示效果，同时也是 Markdown 语法的参考文章。保留或者删除本文，开始自己的创作吧！&lt;/div&gt;&lt;h2&gt;L2 Heading&lt;/h2&gt;
 &lt;h3&gt;L3 Heading&lt;/h3&gt;
 &lt;h4&gt;L4 Heading&lt;/h4&gt;
 &lt;h5&gt;L5 Heading&lt;/h5&gt;
@@ -98,6 +98,7 @@
 &lt;li&gt;双击exe等待安装完成。&lt;/li&gt;
 &lt;li&gt;安装完成后双击exe，或者cmd中输入wsl（如果当前distro是唯一的wsl实例的话），就可以进入到CentOS的shell中了。&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;tip&lt;/strong&gt; 在cmd中，输入&lt;code&gt;wslconfig /l&lt;/code&gt;可以查看当前安装了哪些distro实例；输入&lt;code&gt;wslconfig /s CentOS7&lt;/code&gt;可以将wsl默认实例改为CentOS7。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;tip&lt;/strong&gt; 如果是1903之后的windows版本，直接使用&lt;code&gt;wsl --help&lt;/code&gt;查看相关命令。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
@@ -110,7 +111,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;tip&lt;/strong&gt; 以默认用户进入wsl时，会自动继承Windows的PATH变量，即可以直接使用Windows系统自带的exe命令；非默认用户如果也想继承，只能手动export。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;如果想以root用户登录，可以在wsl里，授予用户&lt;code&gt;sudo su -&lt;/code&gt;权限；也可以直接在cmd中运行以下命令：
+&lt;p&gt;如果想以root用户登录，可以在wsl里，授予用户&lt;code&gt;sudo su -&lt;/code&gt;权限（或者在root下&lt;code&gt;passwd -d root&lt;/code&gt;删掉root密码，可以直接使用&lt;code&gt;su -&lt;/code&gt;切换）；也可以直接在cmd中运行以下命令：
 &lt;code&gt;wsl -u root&lt;/code&gt;。&lt;/p&gt;
 &lt;h3&gt;WSL启动配置&lt;/h3&gt;
 &lt;p&gt;wsl允许配置&lt;code&gt;/etc/wsl.conf&lt;/code&gt;以在启动时完成自动配置。（详见&lt;a href="https://devblogs.microsoft.com/commandline/automatically-configuring-wsl/"&gt;Automatically Configuring WSL&lt;/a&gt;）&lt;/p&gt;
@@ -131,18 +132,14 @@ curl https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/mas
 mv /tmp/systemctl.py /usr/bin/systemctl
 chmod +x /usr/bin/systemctl &lt;span class="c1"&gt;# 增加可执行权限&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;SSH&lt;/h3&gt;
-&lt;p&gt;如果想用SecureCRT等终端连接到wsl，需要启用ssh。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;执行&lt;code&gt;ssh-keygen -A&lt;/code&gt;以生成默认key，否则sshd会启动失败。&lt;/li&gt;
-&lt;li&gt;配置&lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;。&lt;strong&gt;建议&lt;code&gt;UseDNS no&lt;/code&gt;&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;根据上一节提供的方法以启用&lt;code&gt;systemctl&lt;/code&gt;，执行&lt;code&gt;systemctl start sshd&lt;/code&gt;以启动sshd。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;systemctl status sshd&lt;/code&gt;检查是否运行成功。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;如果希望开机启动sshd，可按以下步骤完成：&lt;/p&gt;
+&lt;h3&gt;systemd与开机启动&lt;/h3&gt;
+&lt;p&gt;wsl本身没有开机启动的概念，所以并不会走完整的initd，systemd也不会初始化(这可能会导致ptrace不能正常工作、共享内存参数设置失败等问题)。
+可以通过下面的步骤来workaround：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;在wsl下，新建文件&lt;code&gt;/etc/init.wsl&lt;/code&gt;：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#! /bin/bash&lt;/span&gt;
- service sshd &lt;span class="nv"&gt;$1&lt;/span&gt;
+ &lt;span class="c1"&gt;### 启动systemd相关初始化&lt;/span&gt;
+ service systemd-sysctl &lt;span class="nv"&gt;$1&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;保存文件，并赋予可执行权限&lt;code&gt;chmod +x /etc/init.wsl&lt;/code&gt;&lt;/p&gt;
@@ -152,10 +149,17 @@ chmod +x /usr/bin/systemctl &lt;span class="c1"&gt;# 增加可执行权限&lt;/s
 &lt;pre&gt;&lt;code&gt; Set ws = WScript.CreateObject("WScript.Shell")
  ws.run "wsl -d CentOS7 -u root /etc/init.wsl start", vbhide&lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Windows重启后，将自动执行该vbs脚本，并完成sshd自启动。&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;Windows重启后，将自动执行该vbs脚本，并借助systemd-sysctl进行初始化。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/li&gt;
+&lt;h3&gt;SSH&lt;/h3&gt;
+&lt;p&gt;如果想用SecureCRT等终端连接到wsl，需要启用ssh。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;执行&lt;code&gt;ssh-keygen -A&lt;/code&gt;以生成默认key，否则sshd会启动失败。&lt;/li&gt;
+&lt;li&gt;配置&lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;。&lt;strong&gt;建议&lt;code&gt;UseDNS no&lt;/code&gt;&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;根据上一节提供的方法以启用&lt;code&gt;systemctl&lt;/code&gt;，执行&lt;code&gt;systemctl start sshd&lt;/code&gt;以启动sshd。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;systemctl status sshd&lt;/code&gt;检查是否运行成功。&lt;/li&gt;
+&lt;li&gt;如果希望开机启动sshd，可以在前述的&lt;code&gt;/etc/init.wsl&lt;/code&gt;中加入&lt;code&gt;service sshd $1&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;卸载&lt;/h2&gt;
 &lt;p&gt;要卸载WSL，进入cmd，执行&lt;code&gt;wslconfig /u CentOS7&lt;/code&gt;即可。&lt;/p&gt;

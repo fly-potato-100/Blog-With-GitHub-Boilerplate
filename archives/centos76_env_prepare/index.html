@@ -19,7 +19,7 @@
     <script>
         var ExSearchConfig = {
             root: "",
-            api: "/Blog-With-GitHub-Boilerplate/1e984068b31ec9da1b5dfaa3c2f27bd7.json"
+            api: "/Blog-With-GitHub-Boilerplate/9181b1777555688eda0cb5704758af9d.json"
         }
     </script>
     
@@ -100,6 +100,7 @@
 <li>双击exe等待安装完成。</li>
 <li>安装完成后双击exe，或者cmd中输入wsl（如果当前distro是唯一的wsl实例的话），就可以进入到CentOS的shell中了。<ul>
 <li><strong>tip</strong> 在cmd中，输入<code>wslconfig /l</code>可以查看当前安装了哪些distro实例；输入<code>wslconfig /s CentOS7</code>可以将wsl默认实例改为CentOS7。</li>
+<li><strong>tip</strong> 如果是1903之后的windows版本，直接使用<code>wsl --help</code>查看相关命令。</li>
 </ul>
 </li>
 </ol>
@@ -112,7 +113,7 @@
 <ul>
 <li><strong>tip</strong> 以默认用户进入wsl时，会自动继承Windows的PATH变量，即可以直接使用Windows系统自带的exe命令；非默认用户如果也想继承，只能手动export。</li>
 </ul>
-<p>如果想以root用户登录，可以在wsl里，授予用户<code>sudo su -</code>权限；也可以直接在cmd中运行以下命令：
+<p>如果想以root用户登录，可以在wsl里，授予用户<code>sudo su -</code>权限（或者在root下<code>passwd -d root</code>删掉root密码，可以直接使用<code>su -</code>切换）；也可以直接在cmd中运行以下命令：
 <code>wsl -u root</code>。</p>
 <h3>WSL启动配置</h3>
 <p>wsl允许配置<code>/etc/wsl.conf</code>以在启动时完成自动配置。（详见<a href="https://devblogs.microsoft.com/commandline/automatically-configuring-wsl/">Automatically Configuring WSL</a>）</p>
@@ -133,18 +134,14 @@ curl https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/mas
 mv /tmp/systemctl.py /usr/bin/systemctl
 chmod +x /usr/bin/systemctl <span class="c1"># 增加可执行权限</span>
 </pre></div>
-<h3>SSH</h3>
-<p>如果想用SecureCRT等终端连接到wsl，需要启用ssh。</p>
-<ol>
-<li>执行<code>ssh-keygen -A</code>以生成默认key，否则sshd会启动失败。</li>
-<li>配置<code>/etc/ssh/sshd_config</code>。<strong>建议<code>UseDNS no</code></strong>。</li>
-<li>根据上一节提供的方法以启用<code>systemctl</code>，执行<code>systemctl start sshd</code>以启动sshd。</li>
-<li><code>systemctl status sshd</code>检查是否运行成功。</li>
-<li><p>如果希望开机启动sshd，可按以下步骤完成：</p>
+<h3>systemd与开机启动</h3>
+<p>wsl本身没有开机启动的概念，所以并不会走完整的initd，systemd也不会初始化(这可能会导致ptrace不能正常工作、共享内存参数设置失败等问题)。
+可以通过下面的步骤来workaround：</p>
 <ol>
 <li><p>在wsl下，新建文件<code>/etc/init.wsl</code>：</p>
 <div class="highlight"><pre><span></span><span class="ch">#! /bin/bash</span>
- service sshd <span class="nv">$1</span>
+ <span class="c1">### 启动systemd相关初始化</span>
+ service systemd-sysctl <span class="nv">$1</span>
 </pre></div>
 </li>
 <li><p>保存文件，并赋予可执行权限<code>chmod +x /etc/init.wsl</code></p>
@@ -154,10 +151,17 @@ chmod +x /usr/bin/systemctl <span class="c1"># 增加可执行权限</span>
 <pre><code> Set ws = WScript.CreateObject("WScript.Shell")
  ws.run "wsl -d CentOS7 -u root /etc/init.wsl start", vbhide</code></pre>
 </li>
-<li><p>Windows重启后，将自动执行该vbs脚本，并完成sshd自启动。</p>
+<li><p>Windows重启后，将自动执行该vbs脚本，并借助systemd-sysctl进行初始化。</p>
 </li>
 </ol>
-</li>
+<h3>SSH</h3>
+<p>如果想用SecureCRT等终端连接到wsl，需要启用ssh。</p>
+<ol>
+<li>执行<code>ssh-keygen -A</code>以生成默认key，否则sshd会启动失败。</li>
+<li>配置<code>/etc/ssh/sshd_config</code>。<strong>建议<code>UseDNS no</code></strong>。</li>
+<li>根据上一节提供的方法以启用<code>systemctl</code>，执行<code>systemctl start sshd</code>以启动sshd。</li>
+<li><code>systemctl status sshd</code>检查是否运行成功。</li>
+<li>如果希望开机启动sshd，可以在前述的<code>/etc/init.wsl</code>中加入<code>service sshd $1</code></li>
 </ol>
 <h2>卸载</h2>
 <p>要卸载WSL，进入cmd，执行<code>wslconfig /u CentOS7</code>即可。</p>
